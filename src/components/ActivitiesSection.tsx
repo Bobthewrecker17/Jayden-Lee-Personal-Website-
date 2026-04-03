@@ -118,6 +118,7 @@ const ActivitiesSection = () => {
       </div>
     </div>
   </section>
-);
+  );
+};
 
 export default ActivitiesSection;

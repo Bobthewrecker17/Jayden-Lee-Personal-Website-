@@ -46,6 +46,7 @@ const AwardsSection = () => {
       </div>
     </div>
   </section>
-);
+  );
+};
 
 export default AwardsSection;

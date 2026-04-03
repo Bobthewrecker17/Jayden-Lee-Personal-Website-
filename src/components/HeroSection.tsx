@@ -43,6 +43,7 @@ const HeroSection = () => {
       </div>
     </div>
   </section>
-);
+  );
+};
 
 export default HeroSection;
