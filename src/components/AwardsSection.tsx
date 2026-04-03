@@ -17,9 +17,11 @@ const awards: Award[] = [
   { title: "Youth Ministry Award", org: "Community Church", date: "2022", icon: "✝️" },
 ];
 
-const AwardsSection = () => (
+const AwardsSection = () => {
+  const ref = useScrollFade<HTMLDivElement>();
+  return (
   <section id="awards" className="py-24 px-6 bg-secondary/40">
-    <div className="max-w-4xl mx-auto">
+    <div ref={ref} className="max-w-4xl mx-auto">
       <h2 className="text-3xl font-bold tracking-tight text-foreground text-center mb-4">
         Awards & Achievements
       </h2>
