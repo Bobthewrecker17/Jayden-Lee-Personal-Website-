@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Layout from "@/components/Layout";
 import Index from "./pages/Index";
 import Activities from "./pages/Activities";
+import ActivityCategory from "./pages/ActivityCategory";
 import Awards from "./pages/Awards";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
@@ -22,6 +23,7 @@ const App = () => (
           <Route element={<Layout />}>
             <Route path="/" element={<Index />} />
             <Route path="/activities" element={<Activities />} />
+            <Route path="/activities/:category" element={<ActivityCategory />} />
             <Route path="/awards" element={<Awards />} />
             <Route path="/contact" element={<Contact />} />
           </Route>
