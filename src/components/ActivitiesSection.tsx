@@ -1,4 +1,5 @@
 import { Badge } from "@/components/ui/badge";
+import { useScrollFade } from "@/hooks/use-scroll-fade";
 
 type Category = "Clubs" | "Volunteering" | "Faith";
 
