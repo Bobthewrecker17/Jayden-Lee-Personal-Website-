@@ -1,4 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
+import { useScrollFade } from "@/hooks/use-scroll-fade";
 
 interface Award {
   title: string;
