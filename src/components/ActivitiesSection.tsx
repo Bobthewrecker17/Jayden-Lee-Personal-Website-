@@ -1,4 +1,5 @@
 import { Badge } from "@/components/ui/badge";
+import { useScrollFade } from "@/hooks/use-scroll-fade";
 
 type Category = "Clubs" | "Volunteering" | "Faith";
 
@@ -61,9 +62,11 @@ const categoryStyles: Record<Category, string> = {
   Faith: "bg-[hsl(var(--faith))] text-[hsl(var(--faith-foreground))]",
 };
 
-const ActivitiesSection = () => (
+const ActivitiesSection = () => {
+  const ref = useScrollFade<HTMLDivElement>();
+  return (
   <section id="activities" className="py-24 px-6">
-    <div className="max-w-3xl mx-auto">
+    <div ref={ref} className="max-w-3xl mx-auto">
       <h2 className="text-3xl font-bold tracking-tight text-foreground text-center mb-4">
         Activities & Involvement
       </h2>
@@ -115,6 +118,7 @@ const ActivitiesSection = () => (
       </div>
     </div>
   </section>
-);
+  );
+};
 
 export default ActivitiesSection;
