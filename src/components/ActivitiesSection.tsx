@@ -1,6 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { useScrollFade } from "@/hooks/use-scroll-fade";
 import { useState } from "react";
+import { ImagePlus } from "lucide-react";
 
 type Category = "School" | "Christian" | "Volunteering" | "Research";
 
@@ -10,56 +11,89 @@ interface Activity {
   date: string;
   description: string;
   category: Category;
+  image?: string;
 }
 
 const activities: Activity[] = [
+  // School
   {
-    title: "Student Council President",
-    org: "School Student Government",
-    date: "2024 – Present",
-    description: "Leading weekly council meetings, organizing school-wide events, and representing student interests to administration.",
+    title: "Friends in Serving Him — Christian Club President",
+    org: "Dublin High School",
+    date: "April 2024 – Present",
+    description: "Refounded and re-established the Friends in Serving Him Christian club after it had been discontinued. Led and coordinated a club of approximately 40 members. Planned and executed an outreach event with 100+ attendees promoting Christianity.",
     category: "School",
   },
   {
-    title: "Debate Club Vice President",
-    org: "School Debate Team",
-    date: "2022 – Present",
-    description: "Competing in regional tournaments, coaching new members, and organizing practice sessions.",
+    title: "Generation Code Club President",
+    org: "Dublin High School",
+    date: "July 2024 – Present",
+    description: "Delivered 6-week instructional sessions for middle school students teaching introductory Python. Led student officers and organized meetings. Coordinated with school districts to plan and execute coding camps.",
     category: "School",
   },
   {
-    title: "Youth Group Leader",
-    org: "Community Church",
-    date: "2023 – Present",
-    description: "Mentoring younger students in weekly Bible study, organizing retreats, and coordinating service projects.",
+    title: "Chamber Orchestra — First Violin (4th Chair)",
+    org: "Dublin High School",
+    date: "August 2024 – Present",
+    description: "Played first violin contributing to ensemble performance. Participated in the Midwest Clinic as an orchestra member.",
+    category: "School",
+  },
+  // Christian
+  {
+    title: "New Life Church Youth Praise Team Leader",
+    org: "New Life Church",
+    date: "July 2024 – Present",
+    description: "Led a youth praise team of ~7 members. Coordinated rehearsals and song arrangements. Fostered a collaborative and supportive musical environment.",
     category: "Christian",
   },
   {
-    title: "Worship Team Member",
-    org: "Community Church",
-    date: "2021 – Present",
-    description: "Playing guitar and singing on the worship team for Sunday services and special events.",
+    title: "Navajo Mission Trip — Youth Leader",
+    org: "Church Mission",
+    date: "November 22–25, 2025",
+    description: "Served as Youth Leader guiding 10+ students from elementary through high school. Led evangelism efforts and outreach activities for groups of ~50 Navajo children and adults, organizing programs aimed at encouragement and community engagement.",
     category: "Christian",
   },
   {
-    title: "Habitat for Humanity Volunteer",
-    org: "Local Chapter",
-    date: "2023 – Present",
-    description: "Building homes on weekends, fundraising for materials, and recruiting fellow students to join the cause.",
+    title: "Guatemala Medical Camp",
+    org: "Medical Mission",
+    date: "June 18–25, 2025",
+    description: "Shadowed cataract eye surgeries, observing surgical techniques and patient care. Assisted with pre-surgical patient preparation. Led dance and movement activities in rural villages to engage patients and community members.",
+    category: "Christian",
+  },
+  // Volunteering
+  {
+    title: "Hwarang Youth Foundation — Regional President & Systems Manager",
+    org: "Hwarang Youth Foundation",
+    date: "April 2023 – Present",
+    description: "Led a regional chapter of ~10 members while overseeing digital infrastructure supporting ~70 volunteers and coordinating service initiatives contributing to 1000+ volunteer hours. Developed software tools and website systems to track volunteer hours.",
     category: "Volunteering",
   },
   {
-    title: "Food Bank Assistant",
-    org: "City Food Bank",
-    date: "2022 – 2023",
-    description: "Sorting and distributing food donations every Saturday, helping families in need within the community.",
+    title: "AI Senior Center Workshops",
+    org: "Senior Centers",
+    date: "July 2025 – Present",
+    description: "Led interactive workshops for 70+ seniors across multiple centers on using generative AI for search, writing, and communication. Co-developed tech curriculum with a Google AI consultant.",
     category: "Volunteering",
   },
   {
-    title: "Science Fair Research",
-    org: "School Science Department",
-    date: "2023 – Present",
-    description: "Conducting independent research on environmental science topics and presenting findings at regional competitions.",
+    title: "Hwarang Youth Foundation Member",
+    org: "Hwarang Youth Foundation",
+    date: "August 2022 – Present",
+    description: "Volunteered in local activities in Dublin and Santa Clara. Tutored students in English, Korean, and coding; interacted with seniors at senior centers; and participated in local park cleanups. 1000+ volunteer hours.",
+    category: "Volunteering",
+  },
+  // Research
+  {
+    title: "Agentic AI Research",
+    org: "Aspiring Scholars Directed Research Program (ASDRP)",
+    date: "Jan 2025 – Feb 2026",
+    description: "Researched multi-agent communication and coordination systems. Co-authored a JEI research paper titled \"The Effect of Communication Structure on Multi-Agent System Outputs.\" Developed a Hyper-Local Growth Engine for small-medium businesses.",
+    category: "Research",
+  },
+  {
+    title: "BioVibe Startup",
+    org: "Student Startup",
+    date: "April 2024 – Present",
+    description: "Designed and developed a personalized stress-tracking headband tailored for high school students. Collaborated with a team of three students to research, prototype, and refine the wearable device. Integrated stress-monitoring principles to support student well-being.",
     category: "Research",
   },
 ];
@@ -105,63 +139,61 @@ const ActivitiesSection = () => {
 
         {/* Filter tabs */}
         <div className="flex flex-wrap justify-center gap-2 mb-12">
-          {(["All", ...categories] as const).map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActive(cat)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                active === cat
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-secondary text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
+          {(["All", ...categories] as const).map((cat) => {
+            const count = cat === "All" ? activities.length : activities.filter(a => a.category === cat).length;
+            return (
+              <button
+                key={cat}
+                onClick={() => setActive(cat)}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                  active === cat
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-secondary text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {cat} <span className="ml-1 opacity-70">({count})</span>
+              </button>
+            );
+          })}
         </div>
 
-        {/* Timeline */}
-        <div className="relative">
-          <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-border md:-translate-x-px" />
-
-          <div className="space-y-10">
-            {filtered.map((a, i) => {
-              const isLeft = i % 2 === 0;
-              const styles = categoryStyles[a.category];
-              return (
-                <div
-                  key={`${a.title}-${a.category}`}
-                  className={`relative flex flex-col md:flex-row ${
-                    isLeft ? "md:flex-row" : "md:flex-row-reverse"
-                  } items-start md:items-center gap-4`}
-                >
-                  {/* Dot */}
-                  <div className={`absolute left-4 md:left-1/2 w-3 h-3 rounded-full ${styles.dot} md:-translate-x-1.5 translate-y-1 z-10`} />
-
-                  {/* Card */}
-                  <div
-                    className={`ml-10 md:ml-0 md:w-[calc(50%-2rem)] ${
-                      isLeft ? "md:mr-auto md:pr-8" : "md:ml-auto md:pl-8"
-                    }`}
-                  >
-                    <div className="bg-card border border-border rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow">
-                      <div className="flex items-center gap-2 mb-2 flex-wrap">
-                        <Badge className={`${styles.badge} border-0 text-xs`}>
-                          {a.category}
-                        </Badge>
-                        <span className="text-xs text-muted-foreground">{a.date}</span>
-                      </div>
-                      <h3 className="font-semibold text-foreground">{a.title}</h3>
-                      <p className="text-sm text-muted-foreground mt-0.5">{a.org}</p>
-                      <p className="text-sm text-muted-foreground mt-2 leading-relaxed">
-                        {a.description}
-                      </p>
+        {/* Activity cards */}
+        <div className="space-y-6">
+          {filtered.map((a) => {
+            const styles = categoryStyles[a.category];
+            return (
+              <div
+                key={`${a.title}-${a.category}`}
+                className="bg-card border border-border rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+              >
+                {/* Image placeholder area */}
+                {a.image ? (
+                  <img src={a.image} alt={a.title} className="w-full h-48 object-cover" />
+                ) : (
+                  <div className="w-full h-36 bg-secondary/60 flex items-center justify-center">
+                    <div className="text-center text-muted-foreground/50">
+                      <ImagePlus className="w-8 h-8 mx-auto mb-1" />
+                      <p className="text-xs">Add a photo</p>
                     </div>
                   </div>
+                )}
+
+                <div className="p-5">
+                  <div className="flex items-center gap-2 mb-2 flex-wrap">
+                    <Badge className={`${styles.badge} border-0 text-xs`}>
+                      {a.category}
+                    </Badge>
+                    <span className="text-xs text-muted-foreground">{a.date}</span>
+                  </div>
+                  <h3 className="font-semibold text-foreground text-lg">{a.title}</h3>
+                  <p className="text-sm text-muted-foreground mt-0.5">{a.org}</p>
+                  <p className="text-sm text-muted-foreground mt-3 leading-relaxed">
+                    {a.description}
+                  </p>
                 </div>
-              );
-            })}
-          </div>
+              </div>
+            );
+          })}
         </div>
 
         {filtered.length === 0 && (
