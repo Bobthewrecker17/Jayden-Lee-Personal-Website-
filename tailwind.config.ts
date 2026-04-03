@@ -47,6 +47,18 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        faith: {
+          DEFAULT: "hsl(var(--faith))",
+          foreground: "hsl(var(--faith-foreground))",
+        },
+        clubs: {
+          DEFAULT: "hsl(var(--clubs))",
+          foreground: "hsl(var(--clubs-foreground))",
+        },
+        volunteer: {
+          DEFAULT: "hsl(var(--volunteer))",
+          foreground: "hsl(var(--volunteer-foreground))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
