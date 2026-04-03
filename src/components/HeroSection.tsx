@@ -1,8 +1,11 @@
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { useScrollFade } from "@/hooks/use-scroll-fade";
 
-const HeroSection = () => (
+const HeroSection = () => {
+  const ref = useScrollFade<HTMLDivElement>();
+  return (
   <section id="about" className="min-h-screen flex items-center justify-center px-6 pt-20">
-    <div className="max-w-3xl mx-auto text-center space-y-6 fade-in-up">
+    <div ref={ref} className="max-w-3xl mx-auto text-center space-y-6">
       <Avatar className="w-28 h-28 mx-auto ring-4 ring-border">
         <AvatarFallback className="text-3xl font-bold bg-secondary text-secondary-foreground">
           YN
