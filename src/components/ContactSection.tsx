@@ -1,12 +1,5 @@
-import { Mail, Instagram, Linkedin, Github } from "lucide-react";
+import { Mail } from "lucide-react";
 import { useScrollFade } from "@/hooks/use-scroll-fade";
-
-const socials = [
-  { icon: Mail, label: "Email", href: "mailto:your.email@example.com" },
-  { icon: Instagram, label: "Instagram", href: "https://instagram.com" },
-  { icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com" },
-  { icon: Github, label: "GitHub", href: "https://github.com" },
-];
 
 const ContactSection = () => {
   const ref = useScrollFade<HTMLDivElement>();
@@ -17,22 +10,17 @@ const ContactSection = () => {
           Let's Connect
         </h2>
         <p className="text-muted-foreground max-w-md mx-auto">
-          Want to learn more about my activities or collaborate on a project? Reach out through any of the links below.
+          Want to learn more about my activities or collaborate on a project? Reach out below.
         </p>
 
         <div className="flex justify-center gap-4 pt-2">
-          {socials.map((s) => (
-            <a
-              key={s.label}
-              href={s.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={s.label}
-              className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
-            >
-              <s.icon className="w-5 h-5" />
-            </a>
-          ))}
+          <a
+            href="mailto:siwlee1017@gmail.com"
+            aria-label="Email"
+            className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
+          >
+            <Mail className="w-5 h-5" />
+          </a>
         </div>
       </div>
     </section>

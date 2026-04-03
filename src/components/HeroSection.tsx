@@ -9,13 +9,13 @@ const HeroSection = () => {
       <div ref={ref} className="max-w-3xl mx-auto text-center space-y-6">
         <Avatar className="w-28 h-28 mx-auto ring-4 ring-border">
           <AvatarFallback className="text-3xl font-bold bg-secondary text-secondary-foreground">
-            YN
+            SL
           </AvatarFallback>
         </Avatar>
 
         <div className="space-y-2">
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground">
-            Your Name
+            Siwoo Lee
           </h1>
           <p className="text-lg text-muted-foreground">
             High School Student · Leader · Volunteer · Person of Faith
@@ -23,9 +23,9 @@ const HeroSection = () => {
         </div>
 
         <p className="text-base text-muted-foreground max-w-xl mx-auto leading-relaxed">
-          I'm a passionate high school student dedicated to making a difference through
-          leadership in clubs, community volunteering, and living out my Christian faith.
-          This page highlights the activities and experiences that shape who I am.
+          I'm a student at Dublin High School with a 4.38 weighted GPA, passionate about
+          leading clubs, serving my community through 1000+ volunteer hours, conducting AI research,
+          and living out my Christian faith. This page highlights the activities and experiences that shape who I am.
         </p>
 
         <div className="flex gap-3 justify-center pt-2">
