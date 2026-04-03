@@ -1,21 +1,25 @@
 import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 const navLinks = [
-  { label: "About", href: "#about" },
-  { label: "Activities", href: "#activities" },
-  { label: "Awards", href: "#awards" },
-  { label: "Contact", href: "#contact" },
+  { label: "About", to: "/" },
+  { label: "Activities", to: "/activities" },
+  { label: "Awards", to: "/awards" },
+  { label: "Contact", to: "/contact" },
 ];
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => setMobileOpen(false), [location]);
 
   return (
     <nav
@@ -24,20 +28,24 @@ const Navbar = () => {
       }`}
     >
       <div className="max-w-5xl mx-auto flex items-center justify-between px-6 py-4">
-        <a href="#about" className="text-lg font-semibold tracking-tight text-foreground">
+        <Link to="/" className="text-lg font-semibold tracking-tight text-foreground">
           My Portfolio
-        </a>
+        </Link>
 
         {/* Desktop */}
         <div className="hidden md:flex gap-8">
           {navLinks.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            <Link
+              key={l.to}
+              to={l.to}
+              className={`text-sm transition-colors ${
+                location.pathname === l.to
+                  ? "text-foreground font-medium"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
             >
               {l.label}
-            </a>
+            </Link>
           ))}
         </div>
 
@@ -68,14 +76,17 @@ const Navbar = () => {
       {mobileOpen && (
         <div className="md:hidden bg-background/95 backdrop-blur-md border-b border-border px-6 pb-4 space-y-3">
           {navLinks.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              onClick={() => setMobileOpen(false)}
-              className="block text-sm text-muted-foreground hover:text-foreground transition-colors"
+            <Link
+              key={l.to}
+              to={l.to}
+              className={`block text-sm transition-colors ${
+                location.pathname === l.to
+                  ? "text-foreground font-medium"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
             >
               {l.label}
-            </a>
+            </Link>
           ))}
         </div>
       )}
