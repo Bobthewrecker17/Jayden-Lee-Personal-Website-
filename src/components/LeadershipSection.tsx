@@ -2,6 +2,7 @@ import { Church, Code2, Crown, Music2, Network, PlayCircle, ShieldCheck, type Lu
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useScrollFade } from "@/hooks/use-scroll-fade";
+import { assetPath } from "@/lib/assets";
 
 type LeadershipVideo = {
   title: string;
@@ -114,8 +115,8 @@ const leadershipRoles: LeadershipRole[] = [
     videos: [
       {
         title: "District Chairperson Handover Ceremony",
-        src: "/homepage-media/generated/leadership/june-10-26.mp4",
-        poster: "/homepage-media/generated/leadership/june-10-26.mp4.png",
+        src: assetPath("/homepage-media/generated/leadership/june-10-26.mp4"),
+        poster: assetPath("/homepage-media/generated/leadership/june-10-26.mp4.png"),
         alt: "June 2026 district chairperson handover ceremony video",
       },
     ],
@@ -131,14 +132,14 @@ const leadershipVideoEvents: LeadershipVideoEvent[] = [
     videos: [
       {
         title: "Leadership Speech",
-        src: "/homepage-media/generated/leadership/august-22-2023.mp4",
-        poster: "/homepage-media/generated/leadership/august-22-2023.mp4.png",
+        src: assetPath("/homepage-media/generated/leadership/august-22-2023.mp4"),
+        poster: assetPath("/homepage-media/generated/leadership/august-22-2023.mp4.png"),
         alt: "August 2023 leadership speech video",
       },
       {
         title: "Leadership Speech",
-        src: "/homepage-media/generated/leadership/august-23-2023.mp4",
-        poster: "/homepage-media/generated/leadership/august-23-2023.mp4.png",
+        src: assetPath("/homepage-media/generated/leadership/august-23-2023.mp4"),
+        poster: assetPath("/homepage-media/generated/leadership/august-23-2023.mp4.png"),
         alt: "August 2023 leadership speech video",
       },
     ],
@@ -151,8 +152,8 @@ const leadershipVideoEvents: LeadershipVideoEvent[] = [
     videos: [
       {
         title: "Leadership Speech",
-        src: "/homepage-media/generated/leadership/3-1-25.mp4",
-        poster: "/homepage-media/generated/leadership/3-1-25.mp4.png",
+        src: assetPath("/homepage-media/generated/leadership/3-1-25.mp4"),
+        poster: assetPath("/homepage-media/generated/leadership/3-1-25.mp4.png"),
         alt: "March 2025 leadership speech video",
       },
     ],
@@ -165,8 +166,8 @@ const leadershipVideoEvents: LeadershipVideoEvent[] = [
     videos: [
       {
         title: "Christianity in My Personal Life",
-        src: "/homepage-media/generated/leadership/april-30-26.mp4",
-        poster: "/homepage-media/generated/leadership/april-30-26.mp4.png",
+        src: assetPath("/homepage-media/generated/leadership/april-30-26.mp4"),
+        poster: assetPath("/homepage-media/generated/leadership/april-30-26.mp4.png"),
         alt: "April 2026 leadership speech video",
       },
     ],
@@ -179,8 +180,8 @@ const leadershipVideoEvents: LeadershipVideoEvent[] = [
     videos: [
       {
         title: "Leadership Speech",
-        src: "/homepage-media/generated/leadership/june-10th-26.mp4",
-        poster: "/homepage-media/generated/leadership/june-10th-26.mp4.png",
+        src: assetPath("/homepage-media/generated/leadership/june-10th-26.mp4"),
+        poster: assetPath("/homepage-media/generated/leadership/june-10th-26.mp4.png"),
         alt: "June 2026 leadership speech video",
       },
     ],

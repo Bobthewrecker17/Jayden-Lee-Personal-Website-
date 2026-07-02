@@ -1,3 +1,5 @@
+import { assetPath } from "@/lib/assets";
+
 export type HomepageMedia = {
   type: "image" | "video" | "document";
   src: string;
@@ -15,7 +17,7 @@ export type HomepageActivity = {
   media: HomepageMedia[];
 };
 
-export const homepageActivities: HomepageActivity[] = [
+const homepageActivitiesData: HomepageActivity[] = [
   {
     "title": "Friends in Serving Him",
     "category": "School & Faith",
@@ -2627,3 +2629,11 @@ export const homepageActivities: HomepageActivity[] = [
     ]
   }
 ];
+
+export const homepageActivities: HomepageActivity[] = homepageActivitiesData.map((activity) => ({
+  ...activity,
+  media: activity.media.map((item) => ({
+    ...item,
+    src: assetPath(item.src),
+  })),
+}));

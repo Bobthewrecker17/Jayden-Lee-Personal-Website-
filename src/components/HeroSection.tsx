@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useScrollFade } from "@/hooks/use-scroll-fade";
+import { assetPath } from "@/lib/assets";
 import CourseCatalog from "@/components/CourseCatalog";
 
 const stats = [
@@ -18,7 +19,7 @@ const HeroSection = () => {
       {/* Full-bleed hero image */}
       <div className="relative w-full h-[58vh] md:h-[68vh] overflow-hidden">
         <img
-          src="/photos/background.avif"
+          src={assetPath("/photos/background.avif")}
           alt="Hero"
           className="w-full h-full object-cover"
         />
@@ -57,7 +58,7 @@ const HeroSection = () => {
 
           <div className="shrink-0 mx-auto md:mx-0">
             <img
-              src="/photos/IMG_2129.jpg"
+              src={assetPath("/photos/IMG_2129.jpg")}
               alt="Siwoo Lee"
               className="w-72 h-72 md:w-80 md:h-80 rounded-2xl object-cover object-[center_20%] shadow-lg"
             />

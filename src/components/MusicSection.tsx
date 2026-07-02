@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { activities } from "@/data/activities";
 import { homepageActivities, type HomepageMedia } from "@/data/homepageMedia";
 import { useScrollFade } from "@/hooks/use-scroll-fade";
+import { assetPath } from "@/lib/assets";
 
 const chamberOrchestra = activities.find((activity) => activity.slug === "chamber-orchestra");
 
@@ -121,7 +122,7 @@ const MidwestClinicMark = () => (
   <div className="inline-flex items-center gap-3 rounded-2xl border border-amber-100/20 bg-white/95 px-4 py-3 text-[#17120d] shadow-lg backdrop-blur">
     <div className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-xl bg-white">
       <img
-        src="/photos/midwest-clinic-logo.jpeg"
+        src={assetPath("/photos/midwest-clinic-logo.jpeg")}
         alt="The Midwest Clinic logo"
         className="h-full w-full object-contain"
       />

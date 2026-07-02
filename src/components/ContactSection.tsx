@@ -1,6 +1,7 @@
 import { ArrowRight, Mail, MessageCircle, Send, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useScrollFade } from "@/hooks/use-scroll-fade";
+import { assetPath } from "@/lib/assets";
 
 const ContactSection = () => {
   const ref = useScrollFade<HTMLDivElement>();
@@ -16,7 +17,7 @@ const ContactSection = () => {
           <div className="grid grid-cols-1 lg:grid-cols-[0.92fr_1.08fr]">
             <div className="relative min-h-[320px] overflow-hidden bg-[#eef2ff]">
               <img
-                src="/homepage-media/generated/photo-gallery/02-04-25-26-2.jpeg"
+                src={assetPath("/homepage-media/generated/photo-gallery/02-04-25-26-2.jpeg")}
                 alt="Siwoo Lee"
                 className="h-full w-full object-cover object-[center_45%]"
               />

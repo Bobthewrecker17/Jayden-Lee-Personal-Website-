@@ -1,10 +1,11 @@
 import { useScrollFade } from "@/hooks/use-scroll-fade";
+import { assetPath } from "@/lib/assets";
 
 const jobs = [
   {
     title: "Clerk",
     org: "Vons Chicken — Livermore",
-    logo: "/photos/vons-logo.jpg",
+    logo: assetPath("/photos/vons-logo.jpg"),
     highlights: [
       "Received customer orders and ensured accurate communication to the kitchen and service areas",
       "Gained real-world work experience in a fast-paced food service environment",

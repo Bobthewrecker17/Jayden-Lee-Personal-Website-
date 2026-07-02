@@ -1,3 +1,5 @@
+import { assetPath } from "@/lib/assets";
+
 export type Category = "School" | "Faith" | "Volunteering" | "Research";
 
 export interface Activity {
@@ -28,7 +30,7 @@ export const activities: Activity[] = [
       "Organized weekly meetings and community discussions",
     ],
     category: "School",
-    coverImage: "/photos/fishclub.jpg",
+    coverImage: assetPath("/photos/fishclub.jpg"),
   },
   {
     slug: "generation-code",
@@ -44,7 +46,7 @@ export const activities: Activity[] = [
       "Closed each session with a week 6 project students built and presented themselves",
     ],
     category: "School",
-    coverImage: "/photos/generationcode.png",
+    coverImage: assetPath("/photos/generationcode.png"),
   },
   {
     slug: "chamber-orchestra",
@@ -58,7 +60,7 @@ export const activities: Activity[] = [
       "Participated in the Midwest Clinic as an orchestra member",
     ],
     category: "School",
-    coverImage: "/photos/orchestra.jpg",
+    coverImage: assetPath("/photos/orchestra.jpg"),
   },
   // Faith
   {
@@ -74,7 +76,7 @@ export const activities: Activity[] = [
       "Fostered a collaborative and supportive musical environment",
     ],
     category: "Faith",
-    coverImage: "/photos/praiseteam.jpg",
+    coverImage: assetPath("/photos/praiseteam.jpg"),
   },
   {
     slug: "navajo-mission-trip",
@@ -89,7 +91,7 @@ export const activities: Activity[] = [
       "Organized outreach programs for ~50 Navajo children and adults",
     ],
     category: "Faith",
-    coverImage: "/homepage-media/generated/church/03-navajo-mission-trip-img-8910.jpg",
+    coverImage: assetPath("/homepage-media/generated/church/03-navajo-mission-trip-img-8910.jpg"),
   },
   // Volunteering
   {
@@ -108,7 +110,7 @@ export const activities: Activity[] = [
       "Participated in senior center visits and local park cleanups",
     ],
     category: "Volunteering",
-    coverImage: "/photos/photo2.jpg",
+    coverImage: assetPath("/photos/photo2.jpg"),
   },
   {
     slug: "ai-senior-center-workshops",
@@ -123,7 +125,7 @@ export const activities: Activity[] = [
       "Co-developed tech curriculum with a Google AI consultant",
     ],
     category: "Volunteering",
-    coverImage: "/homepage-media/generated/ai-senior-center/03-img-2132.jpg",
+    coverImage: assetPath("/homepage-media/generated/ai-senior-center/03-img-2132.jpg"),
   },
   {
     slug: "guatemala-medical-camp",
@@ -138,7 +140,7 @@ export const activities: Activity[] = [
       "Led dance and movement activities in rural villages to engage patients and community members",
     ],
     category: "Volunteering",
-    coverImage: "/homepage-media/generated/hwarang/36-24-25-guatemala-img-0782.jpg",
+    coverImage: assetPath("/homepage-media/generated/hwarang/36-24-25-guatemala-img-0782.jpg"),
   },
   // Research
   {
@@ -154,7 +156,7 @@ export const activities: Activity[] = [
       "Integrated stress-monitoring principles to support student well-being",
     ],
     category: "Research",
-    coverImage: "/homepage-media/generated/biovibe/09-acfgroupphoto.png",
+    coverImage: assetPath("/homepage-media/generated/biovibe/09-acfgroupphoto.png"),
   },
   {
     slug: "socratic-spark-project",
@@ -169,7 +171,7 @@ export const activities: Activity[] = [
       "Connected academic guidance with practical project work",
     ],
     category: "Research",
-    coverImage: "/homepage-media/generated/socratic-spark/01-screenshot-2026-06-30-at-4-01-08-pm.png",
+    coverImage: assetPath("/homepage-media/generated/socratic-spark/01-screenshot-2026-06-30-at-4-01-08-pm.png"),
   },
   {
     slug: "agentic-ai-research",
@@ -188,7 +190,7 @@ export const activities: Activity[] = [
       "Presented research findings at ASDRP conferences with 2000+ attendees",
     ],
     category: "Research",
-    coverImage: "/homepage-media/generated/asdrp/03-screenshot-2026-07-01-at-7-55-01-pm.png",
+    coverImage: assetPath("/homepage-media/generated/asdrp/03-screenshot-2026-07-01-at-7-55-01-pm.png"),
   },
 ];
 

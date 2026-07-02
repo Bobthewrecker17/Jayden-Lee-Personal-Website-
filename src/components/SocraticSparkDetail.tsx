@@ -1,5 +1,6 @@
 import { type Activity } from "@/data/activities";
 import EventPortfolioDetail, { type EventPortfolioConfig } from "@/components/EventPortfolioDetail";
+import { assetPath } from "@/lib/assets";
 
 interface Props {
   activity: Activity;
@@ -26,7 +27,7 @@ const config: EventPortfolioConfig = {
     "Socratic Spark": "Socratic Spark Project",
   },
   mediaCaptions: {
-    "/homepage-media/generated/socratic-spark/01-screenshot-2026-06-30-at-4-01-08-pm.png":
+    [assetPath("/homepage-media/generated/socratic-spark/01-screenshot-2026-06-30-at-4-01-08-pm.png")]:
       "Project snapshot from the Socratic Spark collaboration with Professor Rav Suri at SFSU.",
   },
   stats: [
