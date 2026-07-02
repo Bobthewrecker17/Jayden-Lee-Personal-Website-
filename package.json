@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "sync-media": "node scripts/sync-homepage-media.mjs",
+    "sync-media:watch": "node scripts/sync-homepage-media.mjs --watch",
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",

@@ -2,18 +2,18 @@ import CategoryActivities from "@/components/CategoryActivities";
 import type { Category } from "@/data/activities";
 import { useParams, Navigate } from "react-router-dom";
 
-const validCategories = ["school", "christian", "volunteering", "research"];
+const validCategories = ["school", "faith", "volunteering", "research"];
 
 const categoryMap: Record<string, Category> = {
   school: "School",
-  christian: "Christian",
+  faith: "Faith",
   volunteering: "Volunteering",
   research: "Research",
 };
 
 const ActivityCategory = () => {
   const { category } = useParams<{ category: string }>();
-  
+
   if (!category || !validCategories.includes(category)) {
     return <Navigate to="/activities" replace />;
   }

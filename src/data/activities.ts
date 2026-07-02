@@ -1,6 +1,7 @@
-export type Category = "School" | "Christian" | "Volunteering" | "Research";
+export type Category = "School" | "Faith" | "Volunteering" | "Research";
 
 export interface Activity {
+  slug: string;
   title: string;
   org: string;
   date: string;
@@ -15,6 +16,7 @@ export interface Activity {
 export const activities: Activity[] = [
   // School
   {
+    slug: "friends-in-serving-him",
     title: "Friends in Serving Him",
     org: "Dublin High School",
     date: "April 2024 – Present",
@@ -26,21 +28,26 @@ export const activities: Activity[] = [
       "Organized weekly meetings and community discussions",
     ],
     category: "School",
+    coverImage: "/photos/fishclub.jpg",
   },
   {
+    slug: "generation-code",
     title: "Generation Code",
     org: "Dublin High School",
     date: "July 2024 – Present",
     role: "Club President",
     summary: "Founded and lead a coding education club focused on making programming accessible to younger students through structured instructional sessions.",
     highlights: [
-      "Delivered 6-week instructional sessions teaching introductory Python to middle school students",
-      "Led student officers and organized meetings to support the program",
-      "Coordinated with school districts to plan and execute coding camps",
+      "Co-founded the club with co-president Veer Gill and recruited officers",
+      "Delivered 6-week instructional sessions teaching introductory Python and vibe coding to middle school students",
+      "Ran camps at Cottonwood Creek, Harvest Park, Wells, and Fallon middle schools",
+      "Closed each session with a week 6 project students built and presented themselves",
     ],
     category: "School",
+    coverImage: "/photos/generationcode.png",
   },
   {
+    slug: "chamber-orchestra",
     title: "Chamber Orchestra",
     org: "Dublin High School",
     date: "August 2024 – Present",
@@ -51,9 +58,11 @@ export const activities: Activity[] = [
       "Participated in the Midwest Clinic as an orchestra member",
     ],
     category: "School",
+    coverImage: "/photos/orchestra.jpg",
   },
-  // Christian
+  // Faith
   {
+    slug: "youth-praise-team",
     title: "Youth Praise Team",
     org: "New Life Church",
     date: "July 2024 – Present",
@@ -64,9 +73,11 @@ export const activities: Activity[] = [
       "Coordinated rehearsals and song arrangements",
       "Fostered a collaborative and supportive musical environment",
     ],
-    category: "Christian",
+    category: "Faith",
+    coverImage: "/photos/praiseteam.jpg",
   },
   {
+    slug: "navajo-mission-trip",
     title: "Navajo Mission Trip",
     org: "Church Mission",
     date: "November 22–25, 2025",
@@ -77,23 +88,12 @@ export const activities: Activity[] = [
       "Led evangelism efforts and coordinated communication between youth and parents",
       "Organized outreach programs for ~50 Navajo children and adults",
     ],
-    category: "Christian",
-  },
-  {
-    title: "Guatemala Medical Camp",
-    org: "Medical Mission",
-    date: "June 18–25, 2025",
-    role: "Mission Volunteer",
-    summary: "Participated in a medical mission trip to Guatemala, assisting with eye surgeries and engaging rural communities through service activities.",
-    highlights: [
-      "Shadowed cataract eye surgeries, observing surgical techniques and patient care",
-      "Assisted with pre-surgical patient preparation",
-      "Led dance and movement activities in rural villages to engage patients and community members",
-    ],
-    category: "Christian",
+    category: "Faith",
+    coverImage: "/homepage-media/generated/church/03-navajo-mission-trip-img-8910.jpg",
   },
   // Volunteering
   {
+    slug: "hwarang-youth-foundation",
     title: "Hwarang Youth Foundation",
     org: "Hwarang Youth Foundation",
     date: "April 2023 – Present",
@@ -104,10 +104,14 @@ export const activities: Activity[] = [
       "Coordinated service initiatives contributing to 1000+ volunteer hours",
       "Developed software tools and website systems to track volunteer hours",
       "Co-developed a volunteer tracking application for service hour reporting",
+      "Tutored students in English, Korean, and coding",
+      "Participated in senior center visits and local park cleanups",
     ],
     category: "Volunteering",
+    coverImage: "/photos/photo2.jpg",
   },
   {
+    slug: "ai-senior-center-workshops",
     title: "AI Senior Center Workshops",
     org: "Senior Centers",
     date: "July 2025 – Present",
@@ -119,37 +123,26 @@ export const activities: Activity[] = [
       "Co-developed tech curriculum with a Google AI consultant",
     ],
     category: "Volunteering",
+    coverImage: "/homepage-media/generated/ai-senior-center/03-img-2132.jpg",
   },
   {
-    title: "Community Volunteering",
-    org: "Hwarang Youth Foundation",
-    date: "August 2022 – Present",
-    role: "Member",
-    summary: "Ongoing community service across Dublin and Santa Clara, from tutoring students to organizing park cleanups, accumulating over 1000 volunteer hours.",
+    slug: "guatemala-medical-camp",
+    title: "Guatemala Medical Camp",
+    org: "Medical Mission",
+    date: "June 18–25, 2025",
+    role: "Mission Volunteer",
+    summary: "Participated in a medical mission trip to Guatemala, assisting with eye surgeries and engaging rural communities through service activities.",
     highlights: [
-      "Tutored students in English, Korean, and coding",
-      "Interacted with seniors at senior centers",
-      "Participated in local park cleanups",
-      "1000+ total volunteer hours",
+      "Shadowed cataract eye surgeries, observing surgical techniques and patient care",
+      "Assisted with pre-surgical patient preparation",
+      "Led dance and movement activities in rural villages to engage patients and community members",
     ],
     category: "Volunteering",
+    coverImage: "/homepage-media/generated/hwarang/36-24-25-guatemala-img-0782.jpg",
   },
   // Research
   {
-    title: "Agentic AI Research",
-    org: "Aspiring Scholars Directed Research Program (ASDRP)",
-    date: "Jan 2025 – Feb 2026",
-    role: "Research Fellow",
-    summary: "Conducting research on multi-agent AI systems, exploring how communication structures affect system outputs, and building practical applications for small businesses.",
-    highlights: [
-      "Researched multi-agent communication and coordination systems",
-      "Co-authored a JEI research paper: \"The Effect of Communication Structure on Multi-Agent System Outputs\"",
-      "Developed a Hyper-Local Growth Engine for small-medium businesses",
-      "Presented research findings at ASDRP conferences",
-    ],
-    category: "Research",
-  },
-  {
+    slug: "biovibe-startup",
     title: "BioVibe Startup",
     org: "Student Startup",
     date: "April 2024 – Present",
@@ -161,24 +154,71 @@ export const activities: Activity[] = [
       "Integrated stress-monitoring principles to support student well-being",
     ],
     category: "Research",
+    coverImage: "/homepage-media/generated/biovibe/09-acfgroupphoto.png",
+  },
+  {
+    slug: "socratic-spark-project",
+    title: "Socratic Spark Project",
+    org: "San Francisco State University",
+    date: "2025 – Present",
+    role: "Student Collaborator",
+    summary: "Collaborating with Professor Rav Suri at SFSU on the Socratic Spark project, combining academic mentorship with hands-on research and development.",
+    highlights: [
+      "Collaborated with Professor Rav Suri at San Francisco State University",
+      "Contributed to the Socratic Spark research and development effort",
+      "Connected academic guidance with practical project work",
+    ],
+    category: "Research",
+    coverImage: "/homepage-media/generated/socratic-spark/01-screenshot-2026-06-30-at-4-01-08-pm.png",
+  },
+  {
+    slug: "agentic-ai-research",
+    title: "Agentic AI Research",
+    org: "Aspiring Scholars Directed Research Program (ASDRP)",
+    date: "Jan 2025 – Feb 2026",
+    role: "Researcher",
+    summary:
+      "Researched multi-agent communication and coordination systems with data scientist and AI specialist Mr. Suresh Subramaniam, co-authored a JEI paper, and built a Hyper-Local Growth Engine for small-medium businesses.",
+    highlights: [
+      "Researched multi-agent communication and coordination systems",
+      "Analyzed the impact of different communication structures on system outputs",
+      "Co-authored a JEI research paper titled “The Effect of Communication Structure on Multi-Agent System Outputs” (submitted for publication)",
+      "Developed a Hyper-Local Growth Engine for small-medium businesses",
+      "Designed system workflows for personalized local marketing content",
+      "Presented research findings at ASDRP conferences with 2000+ attendees",
+    ],
+    category: "Research",
+    coverImage: "/homepage-media/generated/asdrp/03-screenshot-2026-07-01-at-7-55-01-pm.png",
   },
 ];
 
-export const categories: Category[] = ["School", "Christian", "Volunteering", "Research"];
+export const categories: Category[] = ["School", "Faith", "Volunteering", "Research"];
+
+export const categoryDisplayNames: Record<Category, string> = {
+  School: "School Life",
+  Faith: "My Faith Journey",
+  Volunteering: "Volunteering",
+  Research: "Research",
+};
 
 export const categoryDescriptions: Record<Category, string> = {
   School: "Clubs, organizations, and extracurriculars that have shaped my high school experience at Dublin High School.",
-  Christian: "Faith-based activities, mission trips, and ministry work that reflect my commitment to serving God and others.",
+  Faith: "Faith-based activities, mission trips, and ministry work that reflect my commitment to serving God and others.",
   Volunteering: "Community service and volunteer work where I give back through leadership, teaching, and direct action.",
   Research: "Academic research and entrepreneurial projects at the intersection of technology and real-world impact.",
 };
+
+export const findActivity = (category: string, slug: string) =>
+  activities.find(
+    (a) => a.category.toLowerCase() === category.toLowerCase() && a.slug === slug
+  );
 
 export const categoryStyles: Record<Category, { badge: string; dot: string }> = {
   School: {
     badge: "bg-clubs text-clubs-foreground",
     dot: "bg-clubs",
   },
-  Christian: {
+  Faith: {
     badge: "bg-faith text-faith-foreground",
     dot: "bg-faith",
   },

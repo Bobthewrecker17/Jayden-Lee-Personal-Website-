@@ -1,49 +1,87 @@
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Link } from "react-router-dom";
 import { useScrollFade } from "@/hooks/use-scroll-fade";
+import CourseCatalog from "@/components/CourseCatalog";
+
+const stats = [
+  { value: "4.67", label: "Weighted GPA (10-12)" },
+  { value: "3.89", label: "Unweighted GPA (10-12)" },
+  { value: "1,200+", label: "Volunteer Hours" },
+  { value: "1500", label: "SAT" },
+  { value: "15", label: "Awards" },
+];
 
 const HeroSection = () => {
   const ref = useScrollFade<HTMLDivElement>();
-  return (
-    <section className="min-h-[80vh] flex items-center justify-center px-6">
-      <div ref={ref} className="max-w-3xl mx-auto text-center space-y-6">
-        <Avatar className="w-28 h-28 mx-auto ring-4 ring-border">
-          <AvatarFallback className="text-3xl font-bold bg-secondary text-secondary-foreground">
-            SL
-          </AvatarFallback>
-        </Avatar>
 
-        <div className="space-y-2">
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground">
-            Siwoo Lee
-          </h1>
-          <p className="text-lg text-muted-foreground">
-            High School Student · Leader · Volunteer · Person of Faith
-          </p>
+  return (
+    <>
+      {/* Full-bleed hero image */}
+      <div className="relative w-full h-[58vh] md:h-[68vh] overflow-hidden">
+        <img
+          src="/photos/background.avif"
+          alt="Hero"
+          className="w-full h-full object-cover"
+        />
+        {/* Gradient at top so navbar always blends cleanly */}
+        <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-black/40 to-transparent pointer-events-none" />
+      </div>
+
+      {/* Content below image */}
+      <div ref={ref} className="max-w-5xl mx-auto px-6 py-16 md:py-20">
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-10 md:gap-16 items-start">
+          <div>
+            <h1 className="text-4xl md:text-5xl font-normal tracking-wide text-foreground mb-5 leading-tight">
+              Siwoo Lee
+            </h1>
+            <p className="text-base font-light text-muted-foreground leading-relaxed mb-10">
+              Hi, and welcome to my personal webpage! Here you&apos;ll find a look back at my high
+              school journey: the projects, activities, and milestones that shaped these past four
+              years. I hope it gives you a better sense of who I am. Feel free to reach out if you
+              have any questions!
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <Link
+                to="/activities"
+                className="px-6 py-2.5 rounded-full bg-foreground text-background text-sm font-light tracking-wide hover:opacity-80 transition-all"
+              >
+                See My Activities
+              </Link>
+              <Link
+                to="/contact"
+                className="px-6 py-2.5 rounded-full border border-border text-sm font-light tracking-wide text-foreground hover:bg-secondary transition-all"
+              >
+                Get in Touch
+              </Link>
+            </div>
+          </div>
+
+          <div className="shrink-0 mx-auto md:mx-0">
+            <img
+              src="/photos/IMG_2129.jpg"
+              alt="Siwoo Lee"
+              className="w-72 h-72 md:w-80 md:h-80 rounded-2xl object-cover object-[center_20%] shadow-lg"
+            />
+          </div>
         </div>
 
-        <p className="text-base text-muted-foreground max-w-xl mx-auto leading-relaxed">
-          I'm a student at Dublin High School with a 4.38 weighted GPA, passionate about
-          leading clubs, serving my community through 1000+ volunteer hours, conducting AI research,
-          and living out my Christian faith. This page highlights the activities and experiences that shape who I am.
-        </p>
+        {/* Stats row */}
+        <div className="mt-16 pt-10 border-t border-border grid grid-cols-2 sm:grid-cols-5 gap-8">
+          {stats.map((s) => (
+            <div key={s.label}>
+              <p className="text-3xl font-normal text-foreground mb-1">{s.value}</p>
+              <p className="text-xs font-light text-muted-foreground tracking-wide uppercase">{s.label}</p>
+            </div>
+          ))}
+        </div>
 
-        <div className="flex gap-3 justify-center pt-2">
-          <Link
-            to="/activities"
-            className="inline-flex items-center px-5 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors"
-          >
-            See My Activities
-          </Link>
-          <Link
-            to="/contact"
-            className="inline-flex items-center px-5 py-2.5 rounded-lg border border-border text-sm font-medium text-foreground hover:bg-accent transition-colors"
-          >
-            Get in Touch
-          </Link>
+        <div className="mt-12">
+          <p className="mb-3 text-xs font-light uppercase tracking-widest text-muted-foreground">
+            Coursework
+          </p>
+          <CourseCatalog />
         </div>
       </div>
-    </section>
+    </>
   );
 };
 

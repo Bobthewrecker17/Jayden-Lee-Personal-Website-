@@ -1,140 +1,230 @@
-import { Badge } from "@/components/ui/badge";
 import { useScrollFade } from "@/hooks/use-scroll-fade";
-import { ImagePlus, Calendar, Building2, ArrowLeft } from "lucide-react";
-import { activities, categoryStyles, categoryDescriptions, type Category } from "@/data/activities";
+import { ArrowLeft } from "lucide-react";
+import { activities, categoryDescriptions, categoryDisplayNames, type Category } from "@/data/activities";
+import { homepageActivities } from "@/data/homepageMedia";
+import AutoCyclingCover from "@/components/AutoCyclingCover";
+import CourseCatalog from "@/components/CourseCatalog";
 import { Link } from "react-router-dom";
 
 interface Props {
   category: Category;
 }
 
+const schoolAutoCycleSlugs = new Set([
+  "friends-in-serving-him",
+  "generation-code",
+]);
+
+const slugToMediaTitle: Record<string, string> = {
+  "friends-in-serving-him": "Friends in Serving Him",
+  "generation-code": "Generation Code",
+};
+
+const autoCycleStaggerMs: Record<string, number> = {
+  "friends-in-serving-him": 0,
+  "generation-code": 1700,
+};
+
+const generationCodeCoverExcludedEvents = new Set([
+  "Group Photos 25-26 Semester 1",
+]);
+
+const generationCodeCoverExcludedSrcParts = [
+  "screenshotgnerationcode",
+];
+
+const slugToChurchEventName: Record<string, string> = {
+  "youth-praise-team": "Praise Team",
+  "navajo-mission-trip": "Navajo Mission Trip",
+};
+
+const normalizeEventName = (value: string) => value.trim();
+
+const isSchoolCoverImage = (
+  activityTitle: string,
+  item: (typeof homepageActivities)[number]["media"][number],
+) => {
+  if (item.type !== "image") {
+    return false;
+  }
+
+  if (activityTitle !== "Generation Code") {
+    return true;
+  }
+
+  return (
+    !generationCodeCoverExcludedEvents.has(item.eventName ?? "") &&
+    !generationCodeCoverExcludedSrcParts.some((srcPart) => item.src.includes(srcPart))
+  );
+};
+
+const activityImagesBySlug = new Map(
+  homepageActivities.map((activity) => [
+    activity.title,
+    activity.media
+      .filter((item) => isSchoolCoverImage(activity.title, item))
+      .map((item) => item.src),
+  ])
+);
+
+const getHomepageCoverImages = (a: (typeof activities)[0]) => {
+  if (a.slug === "chamber-orchestra") {
+    const orchestraMedia =
+      homepageActivities.find((item) => item.title === "Orchestra 1st Violin")?.media ?? [];
+
+    return orchestraMedia
+      .filter(
+        (item) =>
+          item.type === "image" &&
+          item.eventName.trim() === "Chamber Orchestra" &&
+          !item.src.includes("midwest-clinic-logo"),
+      )
+      .map((item) => item.src);
+  }
+
+  const detailHref = `/activities/${a.category.toLowerCase()}/${a.slug}`;
+  const homepageMatch = homepageActivities.find((item) => item.href === detailHref);
+  const churchEventName = slugToChurchEventName[a.slug];
+
+  if (homepageMatch) {
+    const images = homepageMatch.media.filter((item) => item.type === "image");
+
+    if (churchEventName) {
+      return images
+        .filter((item) => normalizeEventName(item.eventName ?? "") === churchEventName)
+        .map((item) => item.src);
+    }
+
+    return images.map((item) => item.src);
+  }
+
+  const churchMedia = homepageActivities.find((item) => item.title === "Church & Retreats");
+  if (!churchMedia) {
+    return [];
+  }
+
+  const eventName = churchEventName ?? a.title;
+
+  return churchMedia.media
+    .filter(
+      (item) =>
+        item.type === "image" && normalizeEventName(item.eventName ?? "") === normalizeEventName(eventName),
+    )
+    .map((item) => item.src);
+};
+
+function ActivityCard({ a }: { a: (typeof activities)[0] }) {
+  const detailUrl =
+    a.slug === "chamber-orchestra"
+      ? "/music"
+      : `/activities/${a.category.toLowerCase()}/${a.slug}`;
+  const autoCycleImages =
+    schoolAutoCycleSlugs.has(a.slug) && slugToMediaTitle[a.slug]
+      ? activityImagesBySlug.get(slugToMediaTitle[a.slug]) ?? []
+      : [];
+  const homepageCoverImages = getHomepageCoverImages(a);
+  const cyclingImages =
+    autoCycleImages.length > 1
+      ? autoCycleImages
+      : a.coverImage
+        ? []
+        : homepageCoverImages.length > 1
+          ? homepageCoverImages
+          : [];
+  const coverImages =
+    cyclingImages.length > 0
+      ? cyclingImages
+      : a.coverImage
+        ? [a.coverImage]
+        : homepageCoverImages.length > 0
+          ? homepageCoverImages
+          : autoCycleImages;
+
+  return (
+    <article className="grid grid-cols-1 md:grid-cols-[3fr_2fr]">
+      {/* Image — clicking goes to detail */}
+      <Link to={detailUrl} className="overflow-hidden block">
+        {coverImages.length > 0 ? (
+          cyclingImages.length > 1 ? (
+            <AutoCyclingCover
+              images={cyclingImages}
+              alt={a.title}
+              initialDelayMs={autoCycleStaggerMs[a.slug] ?? 0}
+              className="w-full h-72 md:h-[420px]"
+            />
+          ) : (
+            <img
+              src={coverImages[0]}
+              alt={a.title}
+              className="w-full h-72 md:h-[420px] object-cover transition-transform duration-500 hover:scale-[1.02]"
+            />
+          )
+        ) : (
+          <div className="w-full h-72 md:h-[420px] bg-muted/30" />
+        )}
+      </Link>
+
+      {/* Content */}
+      <div className="flex flex-col justify-center px-10 md:px-14 py-12">
+        <p className="text-xs text-muted-foreground mb-4">{a.date}</p>
+
+        <h2 className="text-2xl md:text-3xl font-normal leading-snug text-foreground mb-3">
+          {a.title}
+        </h2>
+
+        {a.role && (
+          <p className="text-sm font-light text-muted-foreground mb-3">{a.role}</p>
+        )}
+
+        <p className="text-sm font-light text-muted-foreground leading-relaxed mb-5">
+          {a.summary}
+        </p>
+
+        <Link
+          to={detailUrl}
+          className="text-sm underline underline-offset-4 text-foreground w-fit hover:text-muted-foreground transition-colors"
+        >
+          Read More
+        </Link>
+      </div>
+    </article>
+  );
+}
+
 const CategoryActivities = ({ category }: Props) => {
   const ref = useScrollFade<HTMLDivElement>();
   const filtered = activities.filter((a) => a.category === category);
-  const styles = categoryStyles[category];
 
   return (
-    <section className="py-16 px-6">
-      <div ref={ref} className="max-w-4xl mx-auto">
-        {/* Back link */}
+    <section className="pt-28 pb-16 px-6">
+      <div ref={ref} className="max-w-5xl mx-auto">
+        {/* Back */}
         <Link
           to="/activities"
-          className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8"
+          className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors mb-12"
         >
           <ArrowLeft className="w-4 h-4" />
           All Activities
         </Link>
 
         {/* Header */}
-        <div className="mb-16">
-          <Badge className={`${styles.badge} border-0 text-sm px-3 py-1 mb-4`}>
-            {category}
-          </Badge>
-          <h1 className="text-4xl font-bold tracking-tight text-foreground mb-4">
-            {category} Activities
+        <div className="mb-12 border-b border-border pb-10">
+          <h1 className="text-4xl md:text-5xl font-normal tracking-wide text-foreground mb-3">
+            {categoryDisplayNames[category]}
           </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl leading-relaxed">
+          <p className="font-light text-muted-foreground max-w-xl leading-relaxed">
             {categoryDescriptions[category]}
           </p>
         </div>
 
-        {/* Activity entries */}
-        <div className="space-y-24">
-          {filtered.map((a, idx) => (
-            <article key={a.title} className="group">
-              {/* Cover image */}
-              <div className="rounded-2xl overflow-hidden mb-8">
-                {a.coverImage ? (
-                  <img
-                    src={a.coverImage}
-                    alt={a.title}
-                    className="w-full h-64 md:h-80 object-cover"
-                  />
-                ) : (
-                  <div className="w-full h-64 md:h-80 bg-secondary/50 flex items-center justify-center">
-                    <div className="text-center text-muted-foreground/40">
-                      <ImagePlus className="w-10 h-10 mx-auto mb-2" />
-                      <p className="text-sm">Cover photo</p>
-                    </div>
-                  </div>
-                )}
-              </div>
+        {category === "School" && <CourseCatalog />}
 
-              {/* Content */}
-              <div className="max-w-3xl">
-                {/* Meta */}
-                <div className="flex flex-wrap items-center gap-3 mb-3 text-sm text-muted-foreground">
-                  <span className="inline-flex items-center gap-1.5">
-                    <Calendar className="w-4 h-4" />
-                    {a.date}
-                  </span>
-                  <span className="inline-flex items-center gap-1.5">
-                    <Building2 className="w-4 h-4" />
-                    {a.org}
-                  </span>
-                </div>
-
-                <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-1">
-                  {a.title}
-                </h2>
-                {a.role && (
-                  <p className="text-base font-medium text-muted-foreground mb-4">
-                    {a.role}
-                  </p>
-                )}
-
-                <p className="text-base text-muted-foreground leading-relaxed mb-6">
-                  {a.summary}
-                </p>
-
-                {/* Highlights */}
-                {a.highlights.length > 0 && (
-                  <div className="mb-8">
-                    <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground/70 mb-3">
-                      Key Highlights
-                    </h3>
-                    <ul className="space-y-2">
-                      {a.highlights.map((h, i) => (
-                        <li key={i} className="flex items-start gap-3 text-sm text-muted-foreground leading-relaxed">
-                          <span className={`mt-1.5 w-2 h-2 rounded-full shrink-0 ${styles.dot}`} />
-                          {h}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-
-                {/* Gallery */}
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                  {a.galleryImages && a.galleryImages.length > 0 ? (
-                    a.galleryImages.map((img, i) => (
-                      <div key={i} className="rounded-xl overflow-hidden">
-                        <img src={img} alt={`${a.title} photo ${i + 1}`} className="w-full h-36 object-cover" />
-                      </div>
-                    ))
-                  ) : (
-                    <>
-                      {[1, 2, 3].map((n) => (
-                        <div
-                          key={n}
-                          className="rounded-xl bg-secondary/40 h-36 flex items-center justify-center"
-                        >
-                          <div className="text-center text-muted-foreground/30">
-                            <ImagePlus className="w-6 h-6 mx-auto mb-1" />
-                            <p className="text-xs">Photo {n}</p>
-                          </div>
-                        </div>
-                      ))}
-                    </>
-                  )}
-                </div>
-              </div>
-
-              {/* Divider between entries */}
-              {idx < filtered.length - 1 && (
-                <div className="h-px bg-border mt-24" />
-              )}
-            </article>
+        {/* Activity list */}
+        <div className="divide-y divide-border">
+          {filtered.map((a) => (
+            <div key={a.title} className="py-2">
+              <ActivityCard a={a} />
+            </div>
           ))}
         </div>
       </div>
